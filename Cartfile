@@ -1,0 +1,4 @@
+github "jdg/MBProgressHUD"
+github "SnapKit/SnapKit"
+github "Moya/Moya"
+github "onevcat/Kingfisher"

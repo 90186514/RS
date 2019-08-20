@@ -1,0 +1,14 @@
+//
+//  Release.xcconfig
+//  DemoXCConfig
+//
+//  Created by Tomasz Szulc on 14/11/15.
+//  Copyright © 2015 Tomasz Szulc. All rights reserved.
+//
+
+#include "RS_Default.xcconfig"
+
+BACKEND_URL = "http://app.u17.com/v3/appV3_3/ios/phone/"
+//http:\/\/release.api.szulctomasz.com/
+//GCC_PREPROCESSOR_DEFINITIONS = $(GCC_PREPROCESSOR_DEFINITIONS)
+//BACKEND_URL=$(BACKEND_URL)

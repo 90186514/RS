@@ -1,0 +1,14 @@
+//
+//  Default.xcconfig
+//  DemoXCConfig
+//
+//  Created by Tomasz Szulc on 14/11/15.
+//  Copyright © 2015 Tomasz Szulc. All rights reserved.
+//
+PRODUCT_BUNDLE_IDENTIFIER = com.xmfx.qq
+
+APP_VERSION = 1//CFBundleShortVersionString
+
+APP_BUILD_VERSION = 1.0//CFBundleVersion
+
+APP_NAME = RS
