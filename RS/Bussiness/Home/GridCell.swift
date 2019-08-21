@@ -86,13 +86,22 @@ extension GridCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollec
             title.textAlignment = .center
             title.font = UIFont.systemFont(ofSize: 13)
             title.textColor = UIColor(0x202020)
+            
+//            let shadowPath = UIBezierPath.init(rect: icon.bounds)
+//            icon.layer.masksToBounds = false
+            icon.layer.shadowColor = UIColor.clear.cgColor
+            icon.layer.shadowOpacity = 0.25
+            icon.layer.shadowRadius = 3
+//            icon.layer.shadowPath = shadowPath.cgPath
+            icon.layer.shadowOffset = CGSize(width: 10, height: 5)
+            // shadow on the bottom right
         }
         
         
         let data = datas[indexPath.row] as! GridItem
         let icon = cell!.contentView.viewWithTag(7001) as! UIButton
         icon.contentMode = .scaleAspectFill
-        icon.clipsToBounds = true
+//        icon.clipsToBounds = true
         icon.kf.setBackgroundImage(with:URL.init(string: ""), for: .normal, placeholder: UIImage.init(named: "defaultphoto"), options: nil, progressBlock: nil)//data.cover
         //    [icon setImageWithURL:URLFromString(@"icon") placeholderImage:kSQUARE_PLACEDHOLDER_IMG options:SDWebImageRetryFailed];
         
@@ -101,12 +110,15 @@ extension GridCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollec
         if (selectedIndexPath != nil) {
             if (selectedIndexPath == indexPath) {
                 title.textColor = UIColor.red
+                icon.layer.shadowColor = UIColor.black.cgColor
             }else{
                 title.textColor = UIColor(0x202020)
+                icon.layer.shadowColor = UIColor.clear.cgColor
             }
         }else{
             if cell!.tag == 0 {
                 title.textColor = UIColor.red
+                icon.layer.shadowColor = UIColor.black.cgColor
             }
         }
         
@@ -120,16 +132,22 @@ extension GridCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollec
             let cell:UICollectionViewCell = collectionView.cellForItem(at:selectedIndexPath!)!
             let title = cell.contentView.viewWithTag(7003) as! UILabel
             title.textColor = UIColor(0x202020)
+            let icon = cell.contentView.viewWithTag(7001) as! UIButton
+            icon.layer.shadowColor = UIColor.clear.cgColor
         }
         let cell:UICollectionViewCell = collectionView.cellForItem(at:indexPath)!
         let title = cell.contentView.viewWithTag(7003) as! UILabel
         title.textColor = UIColor.red
+        let icon = cell.contentView.viewWithTag(7001) as! UIButton
+        icon.layer.shadowColor = UIColor.black.cgColor
         
         if (indexPath.row != 0) {
             let indexPath = IndexPath.init(row: 0, section: 0)
             let cell:UICollectionViewCell = collectionView.cellForItem(at:indexPath)!
             let title = cell.contentView.viewWithTag(7003) as! UILabel
             title.textColor = UIColor(0x202020)
+            let icon = cell.contentView.viewWithTag(7001) as! UIButton
+            icon.layer.shadowColor = UIColor.clear.cgColor
         }
         
         selectedIndexPath = indexPath
