@@ -312,19 +312,24 @@ extension ViewStylingHelpers  {
         }
         
         securePasswordBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(accountTextField.snp.bottom)
-            //            make.left.equalTo(accountTextField)
-            make.right.equalTo(accountTextField.snp.right).offset(-loginMargin)
-            make.height.equalTo(accountTextField)
+//            make.top.equalTo(accountTextField.snp.bottom) make.right.equalTo(accountTextField.snp.right).offset(-loginMargin)
+//            make.height.equalTo(accountTextField)
+            
+            //rightViewMode
+            make.width.height.equalTo(accountTextField.snp.height)
+            
         }
         
         passwordTextField.snp.makeConstraints { (make) in
             make.top.equalTo(accountTextField.snp.bottom)
             make.left.equalTo(accountTextField)
-//            make.right.equalTo(accountTextField)
-            make.right.equalTo(securePasswordBtn.snp.left).offset(-loginMargin)
+            make.right.equalTo(accountTextField)
+//            make.right.equalTo(securePasswordBtn.snp.left).offset(-loginMargin)
             make.height.equalTo(accountTextField)
         }
+        
+        passwordTextField.rightViewMode = .always
+        passwordTextField.rightView = securePasswordBtn
         
         carve02.snp.makeConstraints { (make) in
             make.left.equalTo(carve01)
