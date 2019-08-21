@@ -345,7 +345,7 @@ extension ActionSheetCus: UITextFieldDelegate{
     }
     // MARK: TextField Delegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (textField == self.fliterTextFiled) {
+        if (textField == fliterTextFiled) {
             //如果是删除减少字数，都返回允许修改
             if string.isEmpty {
                 textField.layer.borderColor = UIColor.gray.cgColor

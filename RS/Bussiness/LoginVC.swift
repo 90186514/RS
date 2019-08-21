@@ -9,16 +9,18 @@
 import UIKit
 import SnapKit
 enum LoginInputError: String {
+    case loginInputTooLong = "请重新输入：4-16位就行，不用太长"
     case accountEmpty = "请输入账号"
     case pwEmpty = "请输入账号密码"
     case pwShort = "请重新输入密码：密码太短太简单"
-    case pwStandard = "请重新输入密码：必须要包含大写及小写字母与数字"
+    case pwStandard = "请重新输入密码：必须包含大小写字母与数字"
 }
 
 fileprivate let loginMargin: CGFloat = 16
 fileprivate let buttonHeight: CGFloat = 40.0
 
 fileprivate extension Selector {
+    static let togglePasswordVisibility = #selector(LoginVC.togglePasswordVisibility(_:))
     static let loginAction = #selector(LoginVC.loginAction(_:))
     static let leftBarButtonItemAction = #selector(LoginVC.leftBarButtonItemAction(_:))
     static let rightBarButtonItemAction = #selector(LoginVC.rightBarButtonItemAction(_:))
@@ -56,20 +58,27 @@ class LoginVC: BaseVC {
 //        return $0
 //    }(UIView())
     fileprivate lazy var carve01 = with(UIView()) {
-        $0.backgroundColor = UIColor.lightGray
+        $0.backgroundColor = .lightGray
     }
     
     fileprivate lazy var passwordTextField: UITextField = UITextField(hq_placeholder: "请输入密码", isSecureText: true)
     fileprivate lazy var carve02: UIView = {
         let carve = UIView()
-        carve.backgroundColor = UIColor.lightGray
+        carve.backgroundColor = .lightGray
         return carve
     }()
-    fileprivate lazy var loginButton: UIButton = UIButton(title: "登录", normalBackColor: UIColor.ThemeColor, hightBackColor: UIColor.green, size: CGSize(width: UIScreen.MAINSCREEN_WIDTH() - (loginMargin * 2), height: buttonHeight))
+    
+    fileprivate lazy var securePasswordBtn = with(UIButton()) {
+        $0.backgroundColor = .clear
+        $0.setImage(UIImage(named: "password_invisible"), for: .normal)
+        $0.setImage(UIImage(named: "password_visible"), for: .selected)
+    }
+    
+    fileprivate lazy var loginButton: UIButton = UIButton(title: "登录", normalBackColor: .ThemeColor, hightBackColor: UIColor.green, size: CGSize(width: UIScreen.MAINSCREEN_WIDTH() - (loginMargin * 2), height: buttonHeight))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         
         title = "登录"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", target: self, action: .leftBarButtonItemAction)
@@ -121,6 +130,15 @@ class LoginVC: BaseVC {
 
 // MARK:- Target Action
 extension LoginVC {
+    // MARK: 密码显示隐藏
+    @objc fileprivate func togglePasswordVisibility(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            passwordTextField.isSecureTextEntry = false
+        } else {
+            passwordTextField.isSecureTextEntry = true
+        }
+    }
     // MARK: 登录
     @objc fileprivate func loginAction(_ sender: UIButton) {
         
@@ -216,6 +234,29 @@ extension LoginVC: UITextFieldDelegate{
         }
         loginButton.setBackgroundImage(UIImage.init(hq_color: .green), for: .normal)
     }
+    
+    // MARK: TextField Delegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (textField == accountTextField
+            ||
+            textField == passwordTextField) {
+            //如果是删除减少字数，都返回允许修改
+            if string.isEmpty {
+//                textField.layer.borderColor = UIColor.gray.cgColor
+                return true;
+            }
+            else{
+//                textField.layer.borderColor = UIColor.red.cgColor
+                if range.location >= 16
+                {
+                    TAlert.show(type:.warning, text: LoginInputError.loginInputTooLong.rawValue)
+                    return false;
+                }
+            }
+        }
+//        textField.layer.borderColor = UIColor.gray.cgColor
+        return true;
+    }
 }
 
 // MARK: - 设置登录控制器界面
@@ -224,14 +265,23 @@ extension ViewStylingHelpers  {
     
     fileprivate func setupUI() {
         view.addSubview(skipButton)
+        
         view.addSubview(accountTextField)
         view.addSubview(carve01)
+        
         view.addSubview(passwordTextField)
+        view.addSubview(securePasswordBtn)
         view.addSubview(carve02)
+        
         view.addSubview(loginButton)
+        
+        accountTextField.delegate = self
+        passwordTextField.delegate = self
         
         accountTextField.addTarget(self, action: #selector(textField1TextChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textField1TextChange(_:)), for: .editingChanged)
+        
+        securePasswordBtn.addTarget(self, action: .togglePasswordVisibility, for: .touchUpInside)
         
         skipButton.addTarget(self, action: .leftBarButtonItemAction, for: .touchUpInside)
         skipButton.setTitle("关闭", for: .normal)
@@ -260,12 +310,22 @@ extension ViewStylingHelpers  {
             make.right.equalTo(view)
             make.height.equalTo(0.5)
         }
+        
+        securePasswordBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(accountTextField.snp.bottom)
+            //            make.left.equalTo(accountTextField)
+            make.right.equalTo(accountTextField.snp.right).offset(-loginMargin)
+            make.height.equalTo(accountTextField)
+        }
+        
         passwordTextField.snp.makeConstraints { (make) in
             make.top.equalTo(accountTextField.snp.bottom)
             make.left.equalTo(accountTextField)
-            make.right.equalTo(accountTextField)
+//            make.right.equalTo(accountTextField)
+            make.right.equalTo(securePasswordBtn.snp.left).offset(-loginMargin)
             make.height.equalTo(accountTextField)
         }
+        
         carve02.snp.makeConstraints { (make) in
             make.left.equalTo(carve01)
             make.bottom.equalTo(passwordTextField)
@@ -274,9 +334,9 @@ extension ViewStylingHelpers  {
         }
         loginButton.snp.makeConstraints { (make) in
             make.top.equalTo(passwordTextField.snp.bottom).offset(loginMargin * 2)
-            loginButtonLeftConstraint = make.left.equalTo(passwordTextField).constraint
-            loginButtonRightConstraint = make.right.equalTo(passwordTextField).constraint
-            make.height.equalTo(passwordTextField)
+            loginButtonLeftConstraint = make.left.equalTo(accountTextField).constraint
+            loginButtonRightConstraint = make.right.equalTo(accountTextField).constraint
+            make.height.equalTo(accountTextField)
         }
     }
 }
