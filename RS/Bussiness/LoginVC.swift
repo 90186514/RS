@@ -133,11 +133,8 @@ extension LoginVC {
     // MARK: 密码显示隐藏
     @objc fileprivate func togglePasswordVisibility(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        if sender.isSelected {
-            passwordTextField.isSecureTextEntry = false
-        } else {
-            passwordTextField.isSecureTextEntry = true
-        }
+        passwordTextField.isSecureTextEntry = !sender.isSelected
+        
     }
     // MARK: 登录
     @objc fileprivate func loginAction(_ sender: UIButton) {
