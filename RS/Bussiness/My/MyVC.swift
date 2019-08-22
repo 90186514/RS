@@ -287,8 +287,7 @@ extension ActionTargets  {
     @objc func avatorBtnAction(_ sender: UIButton){
         UIImage().queryLastPhoto(resizeTo: nil){
             image in
-//            print(image)
-            self.avatorBtn.setImage(image, for: .normal)
+            sender.setImage(image, for: .normal)
         }
     }
 }
