@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Photos
 extension UIImage {
     
     /// 根据(颜色 + 尺寸)快速创建图片
@@ -155,3 +155,31 @@ extension FilterGaussianBlur{
         
     }
 }
+
+private typealias QueryLastPhoto = UIImage
+extension QueryLastPhoto{
+    func queryLastPhoto(resizeTo size: CGSize?, queryCallback: @escaping ((UIImage?) -> Void)) {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        
+        let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+        if let asset = fetchResult.firstObject {
+            let manager = PHImageManager.default()
+            
+            let targetSize = size == nil ? CGSize(width: asset.pixelWidth, height: asset.pixelHeight) : size!
+            
+            manager.requestImage(for: asset,
+                                 targetSize: targetSize,
+                                 contentMode: .aspectFit,
+                                 options: requestOptions,
+                                 resultHandler: { image, info in
+                                    queryCallback(image)
+            })
+        }
+        
+    }
+}
+

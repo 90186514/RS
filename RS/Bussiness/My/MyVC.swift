@@ -76,16 +76,6 @@ extension MyVC {
         
     }
     
-    @objc func headerViewAction(){
-        let image = headerView.backgroundImage(for: .normal)
-        let blurImage = UIImage().filterGaussianBlur(value: 2, originImage: image!, size:headerView.frame.size)
-        SaveToAlbum.sharedInstance.save(image: blurImage!, toAlbum: Bundle.main.namespace) { (any) in
-            if any {
-                
-                UIAlertController.showAlert(message: "saved successful!")
-            }
-        }
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -173,7 +163,9 @@ extension MyVC {
     }
     
     private func reloadHeaderViewData() {
-        avatorBtn.isUserInteractionEnabled = false
+        headerView.addTarget(self, action: #selector(headerViewAction), for: .touchUpInside)
+        avatorBtn.addTarget(self, action: #selector(avatorBtnAction(_:)), for: .touchUpInside)
+//        avatorBtn.isUserInteractionEnabled = false
         avatorBtn.setImage(UIImage(named: "defaultavator")!, for: .normal)
 //        avatorBtn.setTitle(AppManager.shared.userInfo.userName, for: .normal)
 //        avatorBtn.layoutButtonWithEdgeInsetsStyle(style: .MKButtonEdgeInsetsStyleLeft, space: 5)
@@ -223,7 +215,6 @@ extension ViewStylingHelpers  {
         headerView.addSubview(avatorBtn)
         headerView.addSubview(gradientTitleBtn)
         
-        headerView.addTarget(self, action: #selector(headerViewAction), for: .touchUpInside)
         
         tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
@@ -275,6 +266,29 @@ extension MyVC {
         xwDelay(1) { () -> Void in
             self.currentPage += 1
             self.requestDatas()
+        }
+    }
+}
+
+// MARK: - Setup 初始化设置
+private typealias ActionTargets = MyVC
+extension ActionTargets  {
+    @objc func headerViewAction(){
+        let image = headerView.backgroundImage(for: .normal)
+        let blurImage = UIImage().filterGaussianBlur(value: 2, originImage: image!, size:headerView.frame.size)
+        SaveToAlbum.sharedInstance.save(image: blurImage!, toAlbum: Bundle.main.namespace) { (any) in
+            if any {
+                
+                UIAlertController.showAlert(message: "saved successful!")
+            }
+        }
+    }
+    
+    @objc func avatorBtnAction(_ sender: UIButton){
+        UIImage().queryLastPhoto(resizeTo: nil){
+            image in
+//            print(image)
+            self.avatorBtn.setImage(image, for: .normal)
         }
     }
 }
