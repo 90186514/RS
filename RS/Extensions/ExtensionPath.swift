@@ -23,9 +23,16 @@ import UIKit
  ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$
  
  */
-
+//MARK:- 验证电子邮件地址
 extension String {
-    //MARK:- 包含大写及小写字母与数字
+    var isEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: self)
+    }
+}
+//MARK:- 包含大写及小写字母与数字
+extension String {
     static func isStandardPW(originString:String) ->  Bool {
         let regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
         let pre = NSPredicate(format: "SELF MATCHES %@", regex)
@@ -33,8 +40,10 @@ extension String {
         return isMatch
     }
     
-    // MARK:- 在swift中使用NSClassFromString className要加工程名前缀
-    ///
+}
+
+// MARK:- 在swift中使用NSClassFromString className要加工程名前缀
+extension String {
     /// - Parameter className: className
     static func swiftClassFromString(className: String) -> AnyClass! {
         // get the project name
@@ -45,7 +54,10 @@ extension String {
         }
         return nil;
     }
-    // MARK:- DocumentDirectory 路径
+}
+
+// MARK:- DocumentDirectory 路径
+extension String {
     ///
     /// - Parameter fileName: fileName
     /// - Returns: DocumentDirectory 内文件路径

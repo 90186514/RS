@@ -25,7 +25,7 @@ class GradientTextLabel: UIButton {//UIView
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         
-        let colors = [UIColor.ThemeColor.cgColor, UIColor.white.cgColor, UIColor.ThemeColor.cgColor, UIColor.white.cgColor, UIColor.ThemeColor.cgColor]
+        let colors = [UIColor.ThemeColor.cgColor, UIColor.green.cgColor, UIColor.ThemeColor.cgColor, UIColor.green.cgColor, UIColor.ThemeColor.cgColor]
         gradientLayer.colors = colors
         
         let locations = [0.00, 0.25, 0.50, 0.75, 1.00]

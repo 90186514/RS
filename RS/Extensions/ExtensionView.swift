@@ -33,3 +33,20 @@ extension CubeAnimation {
         return animate
     }
 }
+private typealias circleFilled = UIView
+extension circleFilled {
+    func circleFilledWithOutline(circleView: UIView, fillColor: UIColor, outlineColor:UIColor) {
+        let circleLayer = CAShapeLayer()
+        let width = Double(circleView.bounds.size.width);
+        let height = Double(circleView.bounds.size.height);
+        circleLayer.bounds = CGRect(x: 2.0, y: 2.0, width: width-2.0, height: height-2.0)
+        circleLayer.position = CGPoint(x: width/2, y: height/2);
+        let rect = CGRect(x: 2.0, y: 2.0, width: width-2.0, height: height-2.0)
+        let path = UIBezierPath.init(ovalIn: rect)
+        circleLayer.path = path.cgPath
+        circleLayer.fillColor = fillColor.cgColor
+        circleLayer.strokeColor = outlineColor.cgColor
+        circleLayer.lineWidth = 2.0
+        circleView.layer.addSublayer(circleLayer)
+    }
+}

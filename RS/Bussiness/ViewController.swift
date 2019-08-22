@@ -24,7 +24,7 @@ class ViewController: BaseVC {
         startBtn = TimerButton.init()
         startBtn?.timeDown(time: 1)
         view.addSubview(self.startBtn!)
-        startBtn!.backgroundColor = UIColor.red
+//        startBtn!.backgroundColor = UIColor.red
         startBtn!.snp.makeConstraints { (make) in
             startBtnConstrains = make.left.top.equalTo(self.view).offset(200).constraint
             startBtnWHConstrains = make.width.height.equalTo(150).constraint
@@ -34,6 +34,8 @@ class ViewController: BaseVC {
         
 //        let dogView = DogView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
 //        view.addSubview(dogView)
+        view.layoutIfNeeded()
+        view.circleFilledWithOutline(circleView: startBtn!, fillColor: UIColor.red, outlineColor: UIColor.blue)
     }
     
     
@@ -55,7 +57,8 @@ class ViewController: BaseVC {
         //解除left\top
         view.setNeedsLayout() // 若想达到动画效果，这两个方法一定要这样配合使用，不然你试试.
         UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.view.layoutIfNeeded()
+            self!.view.layoutIfNeeded()
+            self!.view.circleFilledWithOutline(circleView: self!.startBtn!, fillColor: UIColor.red, outlineColor: UIColor.blue)
         }
         let sheet: ActionSheetCus = ActionSheetCus.init(array: ["fddff","aasda"],title:"请选择", isShowFliterTextFiled: true)
         sheet.showWithAnimation(ani: true)

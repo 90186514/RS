@@ -174,9 +174,11 @@ extension MyVC {
     
     private func reloadHeaderViewData() {
         avatorBtn.isUserInteractionEnabled = false
-        avatorBtn.setImage(UIImage(named: "defaultphoto")!, for: .normal)
+        avatorBtn.setImage(UIImage(named: "defaultavator")!, for: .normal)
 //        avatorBtn.setTitle(AppManager.shared.userInfo.userName, for: .normal)
-        avatorBtn.layoutButtonWithEdgeInsetsStyle(style: .MKButtonEdgeInsetsStyleLeft, space: 5)
+//        avatorBtn.layoutButtonWithEdgeInsetsStyle(style: .MKButtonEdgeInsetsStyleLeft, space: 5)
+        view.layoutIfNeeded()
+        view.circleFilledWithOutline(circleView: avatorBtn, fillColor: .clear, outlineColor: .blue)
         
         guard let userName = AppManager.shared.userInfo.userName else {
             return
@@ -231,12 +233,14 @@ extension ViewStylingHelpers  {
         //gradientLayer.frame 需要 avatorBtn也要size设置圆角
         
         avatorBtn.snp.makeConstraints { (maker) in
-            maker.left.top.equalToSuperview().offset(50)
-            maker.centerY.equalToSuperview()
+            maker.left.equalToSuperview().offset(50)
+            maker.top.equalToSuperview().offset(tableHeaderHeight/2)
+//            maker.centerY.equalToSuperview()
             maker.width.equalTo(50)
 //            maker.right.equalToSuperview().offset(-50)
             maker.height.equalTo(50)
         }
+        
         
         
         gradientTitleBtn.snp.makeConstraints { (maker) in

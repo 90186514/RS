@@ -26,3 +26,15 @@ extension UITextField {
         isSecureTextEntry = isSecureText
     }
 }
+// MARK:- 如果禁用的文本选择适合您，请尝试此操作。
+class NoMoreSelectionTextField: UITextField {
+    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return CGRect.zero
+    }
+    
+    override var selectedTextRange: UITextRange? {
+        get { return nil }
+        set { return }
+    }
+}
