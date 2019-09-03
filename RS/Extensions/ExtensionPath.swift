@@ -55,7 +55,55 @@ extension String {
         return nil;
     }
 }
-
+// MARK:- isEmptyString
+extension String {
+    static func isEmpty(text: String)-> Bool {
+        if (String.isValueStringWith(str: text) == "") {
+            return true;
+        }
+        return false;
+    }
+    
+    static func isValueStringWith(str: String) -> String {
+        var resultStr: String?
+        //    str =[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (String.init(format:"%@", str).count == 0
+            || String.init(format:"%@", str) == "(null)"
+            || String.init(format:"%@", str) == "<null>"
+            || String.init(format:"%@", str) == "null"
+            //        ||[str stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0
+            ) {
+            resultStr = ""
+        }else{
+            resultStr = String.init(format: str)
+        }
+        return resultStr!
+    }
+}
+// MARK:- SizeOfString
+extension String {
+    static func getContentHeightWithParagraphStyleLineSpacing(lineSpacing: CGFloat,fontWithString: String,fontOfSize: CGFloat,maxWidth: CGFloat) -> CGFloat {
+        var lableSize: CGSize  = .zero;
+    //    if(IS_IOS7)@selector(boundingRectWithSize:options:attributes:context:)
+       
+        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        
+        let sizeTemp = fontWithString.boundingRect(
+            with: CGSize(width: maxWidth, height: CGFloat(MAXFLOAT))
+            ,options: .usesLineFragmentOrigin
+//            |.drawingUsesFontLeading
+            ,attributes: [NSAttributedString.Key.font:
+        UIFont.systemFont(ofSize: fontOfSize),
+        NSAttributedString.Key.paragraphStyle:
+        paragraphStyle]
+           ,context: nil).size
+            
+        lableSize = CGSize(width: sizeTemp.width, height: sizeTemp.height)
+    
+        return lableSize.height
+    }
+}
 // MARK:- DocumentDirectory 路径
 extension String {
     ///
