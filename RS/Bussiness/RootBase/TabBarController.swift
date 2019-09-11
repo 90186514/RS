@@ -11,8 +11,10 @@ class TabBarController: UITabBarController,UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        self.tabBar.isTranslucent = false;
-        self.tabBar.shadowImage = UIImage.init();
+        let tabBar = TabBar()
+        setValue(tabBar, forKey: "tabBar")
+        tabBar.isTranslucent = false;
+        tabBar.shadowImage = UIImage.init();
         
         self.configSubViewControllers()
     }
