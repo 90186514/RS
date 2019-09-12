@@ -44,7 +44,7 @@ class MyCell:UITableViewCell {
         //URL.init(string: "")
         btn.setImage(UIImage.init(named: item.keys.first!), for: .normal)
         btn.setTitle(item.values.first, for: .normal)
-        
+        btn.contentHorizontalAlignment = .left
         btn.layoutButtonWithEdgeInsetsStyle(style: .MKButtonEdgeInsetsStyleLeft, space: 10)
         arrowBtn.isUserInteractionEnabled = false
         switch indexPath.section {
@@ -88,20 +88,18 @@ extension MyCell{
         setLayout()
     }
     private func setLayout() {
-        btn.snp.makeConstraints { (maker) in
-            maker.left.top.equalToSuperview().offset(10)
-            maker.bottom.equalToSuperview().offset(-10)
-            maker.width.equalTo(120)
-            maker.height.equalTo(30)
-        }
-        
         arrowBtn.snp.makeConstraints { (maker) in
             maker.right.equalToSuperview().offset(-10)
             maker.centerY.equalToSuperview()
             maker.width.equalTo(120)
             maker.height.equalTo(30)
         }
-        
+        btn.snp.makeConstraints { (maker) in
+            maker.left.top.equalToSuperview().offset(10)
+            maker.bottom.equalToSuperview().offset(-10)
+            maker.right.equalTo(arrowBtn.snp.left).offset(-10)
+            maker.height.equalTo(30)
+        }
     }
 
 }

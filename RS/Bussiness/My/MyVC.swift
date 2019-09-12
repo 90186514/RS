@@ -339,14 +339,21 @@ extension TableViewDataDelegate: UITableViewDelegate{
         let sectionDic = sections[section]
         let sectionType = sectionDic.sectionType
         let rows = sectionDic.rowItems
-        let itemData = rows[indexPath.row]
+        var itemData = rows[indexPath.row]
 
         switch sectionType {
         case .IndexSection0:
             RefreshVC.pushFromVC(rootVC: self, requestParams: itemData, block: { (_) in
                 
             })
-            
+        
+        case .IndexSection1:
+            DatePickerView.show { time in
+                itemData = ["defaultphoto":time]
+                let indexPath = IndexPath.init(row: 0, section: 1)
+                let cell = tableView.cellForRow(at: indexPath) as! MyCell
+                cell.configure(itemData as! Dictionary< String , String>,indexPath)
+            }
         case .IndexSection2:
             switch indexPath.row {
             case 0: break

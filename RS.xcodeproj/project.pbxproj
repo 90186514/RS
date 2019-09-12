@@ -58,6 +58,7 @@
 		45B1BAEB22C84BF7007A310E /* ExtensionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1BAE022C84BF7007A310E /* ExtensionScreen.swift */; };
 		45B1BAEC22C84BF7007A310E /* ToolMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1BAE122C84BF7007A310E /* ToolMacro.swift */; };
 		45B73AEA2328E6C600BF3C00 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B73AE92328E6C600BF3C00 /* TabBar.swift */; };
+		45B73AEC232A362700BF3C00 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B73AEB232A362700BF3C00 /* DatePickerView.swift */; };
 		45BD5A2222D5887E00FB3DDD /* CellGPE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD5A2122D5887E00FB3DDD /* CellGPE.swift */; };
 		45BD5A2422D5C38100FB3DDD /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD5A2322D5C38100FB3DDD /* HomeVM.swift */; };
 		45ED955422C8C61600E0F63E /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED955322C8C61600E0F63E /* AppManager.swift */; };
@@ -149,6 +150,7 @@
 		45B1BAE022C84BF7007A310E /* ExtensionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionScreen.swift; sourceTree = "<group>"; };
 		45B1BAE122C84BF7007A310E /* ToolMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolMacro.swift; sourceTree = "<group>"; };
 		45B73AE92328E6C600BF3C00 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		45B73AEB232A362700BF3C00 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		45BD5A2122D5887E00FB3DDD /* CellGPE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellGPE.swift; sourceTree = "<group>"; };
 		45BD5A2322D5C38100FB3DDD /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		45ED955322C8C61600E0F63E /* AppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		E0CE7D1B21B13F1900806863 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				45B73AEB232A362700BF3C00 /* DatePickerView.swift */,
 				453564A12306C8DC00F4592A /* SaveToAlbum.swift */,
 				45465CCD22E9BABC00F07B27 /* With.swift */,
 				45311A8722F7F86E00BA39E9 /* GradientTextLabel.swift */,
@@ -581,6 +584,7 @@
 				45B1BABE22C630DA007A310E /* XWRefreshAutoNormalFooter.swift in Sources */,
 				45465CC822E8458400F07B27 /* BannerCell.swift in Sources */,
 				E0CE7CC621AE753300806863 /* AppDelegate.swift in Sources */,
+				45B73AEC232A362700BF3C00 /* DatePickerView.swift in Sources */,
 				45FC9F5E22D20CF600E7D871 /* MyVC.swift in Sources */,
 				45465CE122F2E38200F07B27 /* ExtensionView.swift in Sources */,
 				45B1BAE522C84BF7007A310E /* ExtensionPath.swift in Sources */,
