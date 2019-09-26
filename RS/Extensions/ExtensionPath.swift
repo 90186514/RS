@@ -45,13 +45,9 @@ extension String {
 //MARK:- Time
 extension String {
     static func time() -> String {
-        let today = Date()//当前时间
-        let zone = NSTimeZone.system
-        let interval = zone.secondsFromGMT()
-        let now = today.addingTimeInterval(TimeInterval(interval))
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "YYYY-MM-dd"
-        return dateformatter.string(from: now)
+        return dateformatter.string(from: Date.init())
     }
 }
 
