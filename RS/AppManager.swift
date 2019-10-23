@@ -135,7 +135,7 @@ extension AppManager {
         
     }
     
-    func checkIsPresentLoginVC(fromVc:UIViewController, success: ((Any) -> Void)? = nil, close: ((Any) -> Void)? = nil){
+    func checkIsPresentLoginVC(fromVc:UIViewController, success: ((Any) -> Void)? = nil, close: ((Any) -> Void)? = nil){//可有可无形参( index: (Int)? = 0)或(_: (Any)? = nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0)
         {
             
