@@ -1,20 +1,20 @@
 {
-  "commitish" : "13.0.1",
+  "commitish" : "14.0.0",
   "iOS" : [
     {
-      "name" : "RxMoya",
-      "hash" : "1c8ff3a8af5375119cedbf926c34ec2c146ff9029fa436c31e94d1c44e232876",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "name" : "ReactiveMoya",
+      "hash" : "c7cb7437bd86cf2278f415a927a842015302fcdd48bebeab15be6b646f3e1c4b",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     },
     {
-      "name" : "ReactiveMoya",
-      "hash" : "47ec41b08d882766919e181fe9aeb8152d77256d887e4d0c644bd6ba3720e415",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "name" : "RxMoya",
+      "hash" : "e499a0cfb4d536214575ff41d13a37c00b7fda327e3e7da5f5166c1f7dee9737",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     },
     {
       "name" : "Moya",
-      "hash" : "2675a658cbab5e32ae83469002f0421ecc6dfa893a620aced3585bb03218dec2",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "0075d44598fc5adff186396354e47441835b8d8ebcd3cfa0c9cb2eccbe90b194",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

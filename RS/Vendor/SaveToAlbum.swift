@@ -7,7 +7,7 @@
 //
 
 import Photos
-
+import UIKit
 class SaveToAlbum {
     
     static let sharedInstance = SaveToAlbum()

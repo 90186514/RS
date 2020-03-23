@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let fileName = "/sddgrgergregergdfergrefAppManager.path"
+private let fileName = "/AppManager.path"
 
 class AppManager: NSObject,NSCoding {
     // MARK:- 用户账户的懒加载属性
