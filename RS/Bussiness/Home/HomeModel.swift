@@ -126,13 +126,13 @@ struct HomeItem: Codable {
 }
 
 extension HomeItem: TextPresentable {
-    var text: String { return String("人人红包🧧人人红包🧧人人红包🧧人人红包🧧人人红包🧧人人红包🧧人人红包🧧") + self.title }
+    var text: String { return String("🧧🧧🧧🧧🧧🧧🧧") + self.title }
     var textColor: UIColor { return .darkText }
     var font: UIFont { return .preferredFont(forTextStyle: UIFont.TextStyle.headline) }
 }
 
 extension HomeItem: SwitchPresentable {
-    var switchOn: Bool { return false }
+    var isSwitchTurnedOn: Bool { return false }
     var switchColor: UIColor { return .yellow }
     
     func onSwitchToggleOn(on: Bool) {

@@ -106,7 +106,7 @@ extension GridCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollec
         //    [icon setImageWithURL:URLFromString(@"icon") placeholderImage:kSQUARE_PLACEDHOLDER_IMG options:SDWebImageRetryFailed];
         
         let title = cell!.contentView.viewWithTag(7003) as! UILabel
-        title.text = "人人红包🧧"+data.title
+        title.text = "🧧"+data.title
         if (selectedIndexPath != nil) {
             if (selectedIndexPath == indexPath) {
                 title.textColor = UIColor.red

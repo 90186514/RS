@@ -109,12 +109,14 @@ extension MyVC {
         vm.loadData(page:currentPage, requestParams: ["20"], success: { (model) in
             let model = [
                 SectionModel(sectionType: IndexSectionType.IndexSection0,sectionInfo: [], rowItems: [
-                    ["defaultphoto":"帮助"],
+                    ["defaultphoto":"单选"],
+                    ["defaultphoto":"多选"],
                     ]),
                 SectionModel(sectionType: IndexSectionType.IndexSection1,sectionInfo: [], rowItems: [
                     ["defaultphoto":"设置"],
                     ]),
                 SectionModel(sectionType: IndexSectionType.IndexSection2,sectionInfo: [], rowItems: [
+                    
                     ["defaultphoto":"版本"],
                     ["defaultphoto":"退出"],
                     ]),
@@ -251,7 +253,7 @@ extension MyVC {
     fileprivate func setRefresh(){
         self.tableView.headerView = XWRefreshNormalHeader(target: self, action: #selector(upPullLoadData))
         
-//        self.tableView.footerView = XWRefreshAutoNormalFooter(target: self, action: #selector(downPlullLoadData))
+//        self.tableView.footerView = XWRefreshAutoNormalFooter(target: self, action: #selector(downPullLoadData))
     }
     
     @objc func upPullLoadData(){
@@ -262,7 +264,7 @@ extension MyVC {
         //        }
     }
     
-    @objc func downPlullLoadData(){
+    @objc func downPullLoadData(){
         xwDelay(1) { () -> Void in
             self.currentPage += 1
             self.requestDatas()
@@ -343,9 +345,17 @@ extension TableViewDataDelegate: UITableViewDelegate{
 
         switch sectionType {
         case .IndexSection0:
-            RefreshVC.pushFromVC(rootVC: self, requestParams: itemData, block: { (_) in
+            switch indexPath.row {
+            case 0:
+                CheckmarkVC.pushFromVC(rootVC: self, requestParams: itemData, block: { (_) in
+                })
+            case 1:
+                MultiCheckmarkVC.pushFromVC(rootVC: self, requestParams: itemData, block: { (_) in
+                })
                 
-            })
+            default: break
+            }
+            
         
         case .IndexSection1:
             DatePickerView.show { time in

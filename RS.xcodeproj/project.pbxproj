@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371A54C2242B4847001DBDDB /* CheckmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A54C0242B4846001DBDDB /* CheckmarkCell.swift */; };
+		371A54C3242B4847001DBDDB /* CheckmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A54C1242B4846001DBDDB /* CheckmarkModel.swift */; };
+		371A54C5242C9161001DBDDB /* MultiCheckmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A54C4242C9161001DBDDB /* MultiCheckmarkVC.swift */; };
+		3726F55A242A264F003DA5C2 /* CheckmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726F559242A264F003DA5C2 /* CheckmarkVC.swift */; };
 		450310EC22E048420074F6F4 /* ExtensionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450310EB22E048420074F6F4 /* ExtensionTableView.swift */; };
 		451C2F0122DF14A900C9B09B /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C2F0022DF14A900C9B09B /* GridCell.swift */; };
 		451C2F0D22E03FB100C9B09B /* HomeSectionHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C2F0C22E03FB100C9B09B /* HomeSectionHV.swift */; };
@@ -95,6 +99,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		371A54C0242B4846001DBDDB /* CheckmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCell.swift; sourceTree = "<group>"; };
+		371A54C1242B4846001DBDDB /* CheckmarkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkModel.swift; sourceTree = "<group>"; };
+		371A54C4242C9161001DBDDB /* MultiCheckmarkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiCheckmarkVC.swift; sourceTree = "<group>"; };
+		3726F559242A264F003DA5C2 /* CheckmarkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkVC.swift; sourceTree = "<group>"; };
 		450310EB22E048420074F6F4 /* ExtensionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableView.swift; sourceTree = "<group>"; };
 		451C2F0022DF14A900C9B09B /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		451C2F0C22E03FB100C9B09B /* HomeSectionHV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSectionHV.swift; sourceTree = "<group>"; };
@@ -252,6 +260,10 @@
 			children = (
 				45FC9F5D22D20CF500E7D871 /* MyVC.swift */,
 				45465CE422F44B2500F07B27 /* MyCell.swift */,
+				3726F559242A264F003DA5C2 /* CheckmarkVC.swift */,
+				371A54C4242C9161001DBDDB /* MultiCheckmarkVC.swift */,
+				371A54C0242B4846001DBDDB /* CheckmarkCell.swift */,
+				371A54C1242B4846001DBDDB /* CheckmarkModel.swift */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -542,9 +554,11 @@
 				45465CC622E844D100F07B27 /* CycleScrollView.swift in Sources */,
 				45B1BAE422C84BF7007A310E /* ExtensionImageView.swift in Sources */,
 				45B1BAD522C76360007A310E /* LoginVC.swift in Sources */,
+				371A54C5242C9161001DBDDB /* MultiCheckmarkVC.swift in Sources */,
 				45B1BAC822C630DA007A310E /* XWRefreshHeader.swift in Sources */,
 				45465CCE22E9BABC00F07B27 /* With.swift in Sources */,
 				45B1BACE22C7356E007A310E /* TabBarController.swift in Sources */,
+				3726F55A242A264F003DA5C2 /* CheckmarkVC.swift in Sources */,
 				45B1BAC422C630DA007A310E /* XWShortcutMethod.swift in Sources */,
 				45B1BAEC22C84BF7007A310E /* ToolMacro.swift in Sources */,
 				45B1BAC222C630DA007A310E /* XWConst.swift in Sources */,
@@ -571,6 +585,7 @@
 				45B1BAE822C84BF7007A310E /* ExtensionImage.swift in Sources */,
 				45B1BAC922C630DA007A310E /* XWRefreshStateHeader.swift in Sources */,
 				45BD5A2222D5887E00FB3DDD /* CellGPE.swift in Sources */,
+				371A54C2242B4847001DBDDB /* CheckmarkCell.swift in Sources */,
 				45465CE722F55A8A00F07B27 /* ExtensionAlertView.swift in Sources */,
 				45465CC522E844D100F07B27 /* CycleScrollCell.swift in Sources */,
 				45ED955622C8D07E00E0F63E /* UserInfo.swift in Sources */,
@@ -586,6 +601,7 @@
 				E0CE7CC621AE753300806863 /* AppDelegate.swift in Sources */,
 				45B73AEC232A362700BF3C00 /* DatePickerView.swift in Sources */,
 				45FC9F5E22D20CF600E7D871 /* MyVC.swift in Sources */,
+				371A54C3242B4847001DBDDB /* CheckmarkModel.swift in Sources */,
 				45465CE122F2E38200F07B27 /* ExtensionView.swift in Sources */,
 				45B1BAE522C84BF7007A310E /* ExtensionPath.swift in Sources */,
 				45B1BAE322C84BF7007A310E /* ExtensionColor.swift in Sources */,

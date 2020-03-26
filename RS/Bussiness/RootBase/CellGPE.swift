@@ -141,7 +141,7 @@ protocol TextPresentable {
 }
 
 protocol SwitchPresentable {
-    var switchOn: Bool { get }
+    var isSwitchTurnedOn: Bool { get }
     var switchColor: UIColor { get }
     
     func onSwitchToggleOn(on: Bool)
@@ -159,6 +159,10 @@ protocol TextFieldPresentable {
     func onTextFieldDidEndEditing(textField: UITextField)
 }
 
+protocol IndexPathPresentable {
+    var indexPath: IndexPath { get }
+}
+// MARK:- 默认的全局统一配置处
 extension TextPresentable {
     var textColor: UIColor {
         return .magenta

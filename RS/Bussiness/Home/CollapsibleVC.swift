@@ -144,7 +144,7 @@ extension CollapsibleVC {
     fileprivate func setRefresh(){
         self.tableView.headerView = XWRefreshNormalHeader(target: self, action: #selector(upPullLoadData))
         
-        self.tableView.footerView = XWRefreshAutoNormalFooter(target: self, action: #selector(downPlullLoadData))
+        self.tableView.footerView = XWRefreshAutoNormalFooter(target: self, action: #selector(downPullLoadData))
     }
     
     @objc func upPullLoadData(){
@@ -155,7 +155,7 @@ extension CollapsibleVC {
 //        }
     }
     
-    @objc func downPlullLoadData(){
+    @objc func downPullLoadData(){
         xwDelay(1) { () -> Void in
             self.currentPage += 1
             self.requestDatas()

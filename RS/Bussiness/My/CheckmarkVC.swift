@@ -1,17 +1,18 @@
 //
-//  RefreshVC.swift
-//  XWSwiftRefresh
+//  CheckmarkVC.swift
+//  RS
 //
-//  Created by Xiong Wei on 15/10/7.
-//  Copyright © 2015年 Xiong Wei. All rights reserved.
-//  简书：猫爪
+//  Created by Aalto on 2020/3/25.
+//  Copyright © 2020 aa. All rights reserved.
+//
 
 
 import UIKit
 
-class RefreshVC: UITableViewController {
+class CheckmarkVC: UITableViewController {
     
-    var datas:Array<String> = []
+    var datas:Array<CheckmarkItem> = []
+    var selectedIndex : IndexPath?
     
     var successBlock: DataBlock?
     var requestParams :Any?
@@ -23,7 +24,7 @@ class RefreshVC: UITableViewController {
     
 }
 // MARK: - View生命周期
-extension RefreshVC {
+extension CheckmarkVC {
    override func viewDidLoad() {
         setup()
         requestDatas()
@@ -31,7 +32,7 @@ extension RefreshVC {
 }
 
 // MARK: - 请求数据
-extension RefreshVC {
+extension CheckmarkVC {
     // MARK: fileprivate暴露内部接口,
     fileprivate func requestDatas() {
         // MARK: 初数据
@@ -39,15 +40,22 @@ extension RefreshVC {
 //            let s:String = "数据-" + String(index)
 //            self.datas.append(s)
 //        }
-        (0...13).forEach{
-            self.datas.append("数据-"+String($0))
+        (0...26).forEach{
+//           let e = CheckmarkItem()
+//            e.title = "数据-"+String($0)
+//            e.checked = $0 % 2 == 1 ? true : false
+//           self.datas.append(e)
+        
+    //结构体实例是通过值传递而不是通过引用传递
+            self.datas.append(CheckmarkItem(title:"数据-"+String($0),isChecked:false,cover:""))
+//        self.datas.append("数据-"+String($0))
         }
         self.tableView.reloadData()
     }
 }
 
 // MARK: - Setup 初始化设置
-extension RefreshVC {
+extension CheckmarkVC {
     // MARK: fileprivate暴露内部接口,
     fileprivate func setup() {
         setupStyle()
@@ -70,7 +78,7 @@ extension RefreshVC {
 }
 
 // MARK:- 默认模式&gif图片模式
-extension RefreshVC {
+extension CheckmarkVC {
     // MARK: 默认模式
     func customMode(){
         self.tableView.headerView = XWRefreshNormalHeader(target: self, action: #selector(upPullLoadData))
@@ -125,7 +133,7 @@ extension RefreshVC {
     }
 }
 // MARK:- 加载数据
-extension RefreshVC {
+extension CheckmarkVC {
     @objc func upPullLoadData(){
         
         //延迟执行 模拟网络延迟，实际开发中去掉
@@ -134,9 +142,9 @@ extension RefreshVC {
 //            for i in 0..<3{
 //                self.datas.append("数据-\(i + self.datas.count)")
 //            }
-            (0..<3).forEach{
-                self.datas.append("数据-\($0 + self.datas.count)")
-            }
+//            (0..<3).forEach{
+//                self.datas.append("数据-\($0 + self.datas.count)")
+//            }
             
             self.tableView.reloadData()
             self.tableView.headerView?.endRefreshing()
@@ -147,19 +155,19 @@ extension RefreshVC {
     
     @objc func downPullLoadData(){
         
-        xwDelay(1) { () -> Void in
-            (0..<3).forEach{
-                self.datas.append("数据-\($0 + self.datas.count)")
-            }
+//        xwDelay(1) { () -> Void in
+//            (0..<3).forEach{
+//            self.datas.append("数据-\($0 + self.datas.count)")
+//        }
             
-            self.tableView.reloadData()
-            self.tableView.footerView?.endRefreshing()
-        }
+        self.tableView.reloadData()
+    self.tableView.footerView?.endRefreshing()
+//        }
         
     }
 }
 // MARK: - TableView DataSource
-private typealias TableViewDataSource = RefreshVC
+private typealias TableViewDataSource = CheckmarkVC
 extension TableViewDataSource{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -167,27 +175,57 @@ extension TableViewDataSource{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(indexPath: indexPath as NSIndexPath)
+        let cell = CheckmarkCell<CheckmarkItem>.cellWith(tableView) as! CheckmarkCell<CheckmarkItem>
         
-        cell.textLabel?.text = datas[indexPath.row]
+        var CheckmarkItem = datas[indexPath.row]
         
+        CheckmarkItem.isChecked = selectedIndex == indexPath ? true:false
+        
+        cell.configure(withDelegate: CheckmarkItem)
         return cell
+        
     }
 }
-
+//https://www.jianshu.com/p/e872c6f9ff34
 // MARK: - TableView Delegate
-private typealias TableViewDataDelegate = RefreshVC
+private typealias TableViewDataDelegate = CheckmarkVC
 extension TableViewDataDelegate{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        AppManager.shared.checkIsPresentLoginVC(fromVc: self, success: { (any) in
-            RefreshVC.pushFromVC(rootVC: self, requestParams: self.datas[indexPath.row], block: { (_) in
-                
-            })
-        })
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if  selectedIndex == nil {
+            //记录当前选中的位置索引
+            selectedIndex = indexPath
+            
+            let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheckmarkCell<CheckmarkItem>
+            var CheckmarkItem = datas[indexPath.row]
+            CheckmarkItem.isChecked = true
+            
+            cell.configure(withDelegate: CheckmarkItem)
+            
+        }else{
+            //取消之前选中的
+            let cancelSelectedCell = self.tableView(tableView, cellForRowAt: selectedIndex!) as! CheckmarkCell<CheckmarkItem>
+            var cancelCheckmarkItem = datas[selectedIndex!.row]
+            cancelCheckmarkItem.isChecked = false
+            
+            cancelSelectedCell.configure(withDelegate: cancelCheckmarkItem)
+            //记录当前选中的位置索引
+            selectedIndex = indexPath
+            
+            let cell = self.tableView(tableView, cellForRowAt: indexPath) as! CheckmarkCell<CheckmarkItem>
+            var CheckmarkItem = datas[indexPath.row]
+            CheckmarkItem.isChecked = true
+            
+            cell.configure(withDelegate: CheckmarkItem)
+        }
+        tableView.reloadData()
+        
     }
 }
 // MARK:- class 方法
-extension RefreshVC {
+extension CheckmarkVC {
     /*
      Swift中static func 相当于class final func。禁止这个方法被重写。
      ERROR: Cannot override static method
@@ -195,7 +233,7 @@ extension RefreshVC {
      */
     
     static func  pushFromVC(rootVC:UIViewController,requestParams:Any,block:@escaping DataBlock){
-        let vc  : RefreshVC = RefreshVC.init()
+        let vc  : CheckmarkVC = CheckmarkVC.init()
         vc.successBlock = block
         vc.requestParams = requestParams as AnyObject
         rootVC.navigationController?.pushViewController(vc, animated: true)
