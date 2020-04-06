@@ -314,7 +314,8 @@ extension TableViewDataDelegate: UITableViewDelegate{
             return BannerCell.cellHeightWithModel(1)
             
         case .IndexSection1:
-            return kGridCellHeight
+            let arr = itemData as! [GridItem]
+            return CGFloat(GridCell.cellHeightWithModel(arr))
             
         case .IndexSection2:
             let example = itemData as! HomeItem

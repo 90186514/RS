@@ -45,12 +45,16 @@ class GridCell:UITableViewCell {
     func configure(_ item: Array<Any>, block:@escaping DataBlock){
         datas = item;
         
+        collectionView?.snp.updateConstraints({ (make) in
+       
+            make.height.equalTo(GridCell.cellHeightWithModel(item))
+        })
         collectionView?.reloadData()
         self.dataBlock = block
     }
     
-    class func cellHeightWithModel(_ item: Any) -> CGFloat {
-        return kGridCellHeight
+    class func cellHeightWithModel(_ item: Array<Any>) -> Int {
+        return (item.count%4 == 0 ? item.count/4:item.count/4+1)*Int(kGridCellHeight)
     }
 }
 
@@ -68,20 +72,28 @@ extension GridCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:UICollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: GridCollectionViewCellId, for: indexPath)
         cell!.tag = indexPath.row
-        ////计算图标的中心位置
-        let unitCenterWith:CGFloat = collectionView.frame.width  / 4;
-        let iconWidth:CGFloat = 44.0
-        let iconStartPoint:CGFloat = (unitCenterWith - iconWidth) / 2
+        
         if (cell != nil) {
-            let icon:UIButton = UIButton.init(frame: CGRect(x: iconStartPoint, y: 15, width: iconWidth, height: iconWidth))
+            let icon:UIButton = UIButton.init()
             icon.isUserInteractionEnabled = false
             icon.tag = 7001;
             icon.backgroundColor = UIColor.white
             cell!.contentView.addSubview(icon)
+            icon.snp.makeConstraints({ (make) in
+               make.top.equalTo(15);
+                make.centerX.equalTo(cell!.contentView);
+                make.width.height.equalTo(44);
+            })
             
-            let title:UILabel = UILabel.init(frame: CGRect(x: 0, y: icon.frame.maxY+10, width: unitCenterWith, height: 13))
+            let title:UILabel = UILabel.init()
             title.tag = 7003
             cell!.contentView.addSubview(title)
+            title.snp.makeConstraints({ (make) in
+                make.top.equalTo(icon.snp.bottom).offset(5);
+               make.centerX.equalTo(cell!.contentView);
+               make.left.equalTo(3);
+               make.bottom.equalTo(cell!.contentView);
+            })
             title.backgroundColor = UIColor.white
             title.textAlignment = .center
             title.font = UIFont.systemFont(ofSize: 13)
